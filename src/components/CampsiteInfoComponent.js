@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import React, { Component } from "react";
-import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { Link } from 'react-router-dom';
-=======
 import React from "react";
 
 import {
@@ -14,7 +9,6 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
->>>>>>> 93b50983c1c5a388974c3ccaf8c4f89bcd71a67c
 
 function RenderCampsite({ campsite }) {
   return (
@@ -34,21 +28,12 @@ function RenderComments({ comments }) {
     return (
       <div className="col-md-5 m-1">
         <h4>Comments</h4>
-<<<<<<< HEAD
-        {comments.map((comment) => (
-          <div key={comment.id}>
-            <div className="mb-3">
-              <p>{comment.text}</p>
-              <p>
-                -{comment.author}{" "}
-=======
         {comments.map((comment) => {
           return (
             <div key={comment.id}>
               <p>{comment.text}</p>
               <p>
                 {comment.author} -{" "}
->>>>>>> 93b50983c1c5a388974c3ccaf8c4f89bcd71a67c
                 {new Intl.DateTimeFormat("en-US", {
                   year: "numeric",
                   month: "short",
@@ -56,13 +41,8 @@ function RenderComments({ comments }) {
                 }).format(new Date(Date.parse(comment.date)))}
               </p>
             </div>
-<<<<<<< HEAD
-          </div>
-        ))}
-=======
           );
         })}
->>>>>>> 93b50983c1c5a388974c3ccaf8c4f89bcd71a67c
       </div>
     );
   }
