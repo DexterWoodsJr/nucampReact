@@ -21,7 +21,6 @@ const required = (val) => val && val.length;
 const minLength = (len) => (val) => val && val.length >= len;
 const maxLength = (len) => (val) => !val || val.length <= len;
 
-
 class CommentForm extends Component {
   constructor(props) {
     super(props);
@@ -29,14 +28,21 @@ class CommentForm extends Component {
       modal: false,
     };
   }
+
   toggleModal = () => {
     this.setState({ modal: !this.state.modal });
   };
-  handleSubmit = (values) => {
-    console.log("Workin");
+
+  handleSubmit(values) {
     this.toggleModal();
-    alert(JSON.stringify(values));
-  };
+    this.props.addComment(
+      this.props.campsiteId,
+      values.rating,
+      values.author,
+      values.text
+    );
+  }
+
   render() {
     return (
       <>
@@ -77,16 +83,16 @@ class CommentForm extends Component {
                   }}
                 />
 
-              <Errors
-                className="text-danger"
-                model=".firstName"
-                show="touched"
-                component="div"
-                messages={{
-                  required: "Required",
-                  minLength: "Must be at least 2 characters",
-                  maxLength: "Must be 15 characters or less",
-                }}
+                <Errors
+                  className="text-danger"
+                  model=".firstName"
+                  show="touched"
+                  component="div"
+                  messages={{
+                    required: "Required",
+                    minLength: "Must be at least 2 characters",
+                    maxLength: "Must be 15 characters or less",
+                  }}
                 />
               </div>
               <div className="form-group">
@@ -122,29 +128,32 @@ function RenderCampsite({ campsite }) {
     </div>
   );
 }
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, campsiteId }) {
   if (comments) {
     return (
       <div className="col-md-5 m-1">
-        <h4>Comments Inside it</h4>
-        {comments.map((comment) => (
-          <div key={comment.key}>
-            <p>{comment.text}</p>
-            <p>
-              {comment.author} - {""}{" "}
-              {new Intl.DateTimeFormat("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "2-digit",
-              }).format(new Date(Date.parse(comment.date)))}
-            </p>
-          </div>
-        ))}
-        <CommentForm />
+        <h4>Comments</h4>
+        {comments.map((comment) => {
+          return (
+            <div key={comment.key}>
+              <p>
+                {comment.text}
+                <br />
+                -- {comment.author},
+                {new Intl.DateTimeFormat("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "2-digit",
+                }).format(new Date(Date.parse(comment.date)))}
+              </p>
+            </div>
+          );
+        })}
+        <CommentForm campsiteId={campsiteId} addComment={addComment} />
       </div>
     );
   }
-  return <div></div>;
+  return <div />;
 }
 function CampsiteInfo(props) {
   if (props.campsite) {
@@ -164,7 +173,11 @@ function CampsiteInfo(props) {
         </div>
         <div className="row">
           <RenderCampsite campsite={props.campsite} />
-          <RenderComments comments={props.comments} />
+          <RenderComments
+            comments={props.comments}
+            addComment={props.addComment}
+            campsiteId={props.campsite.id}
+          />
         </div>
       </div>
     );
