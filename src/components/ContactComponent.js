@@ -127,15 +127,15 @@ class Contact extends Component {
                 </Col>
               </Row>
               <Row className="form-group">
-                <Label htmlFor="lastName" md={2}>
-                  Last Name
+                <Label htmlFor="yourName" md={2}>
+                  Your Name
                 </Label>
                 <Col md={10}>
                   <Control.text
-                    model=".lastName"
-                    id="lastName"
-                    name="lastName"
-                    placeholder="Last Name"
+                    model=".yourName"
+                    id="yourName"
+                    className="yourName"
+                    placeholder="Your Name"
                     className="form-control"
                     validators={{
                       required,
