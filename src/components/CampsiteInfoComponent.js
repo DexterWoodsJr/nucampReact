@@ -14,7 +14,7 @@ import {
   Label,
 } from "reactstrap";
 import { Loading } from "./LoadingComponent";
-
+import { baseUrl } from '../shared/baseUrl';
 import { LocalForm, Control, Errors } from "react-redux-form";
 import { Link } from "react-router-dom";
 
@@ -120,7 +120,7 @@ function RenderCampsite({ campsite }) {
   return (
     <div className="col-md-5 m-1">
       <Card>
-        <CardImg top src={campsite.image} alt={campsite.name} />
+      <CardImg top src={baseUrl + campsite.image} alt={campsite.name} />
         <CardBody>
           <CardTitle>{campsite.name}</CardTitle>
           <CardText>{campsite.description}</CardText>
