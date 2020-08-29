@@ -33,27 +33,27 @@ function RenderCard({ item, isLoading, errMess }) {
 }
 
 function Home(props) {
-  console.log(props.promotion);
-  console.log(props.partner);
+  const {promotion, promotionLoading, promotionErrMess, campsitesLoading, campsite, campsitesErrMess, partner} = props
+  
   return (
     <div className="container">
       <div className="row">
         <div className="col-md m-1">
           <RenderCard
-            item={props.promotion}
-            isLoading={props.promotionLoading}
-            errMess={props.promotionErrMess}
+            item={promotion}
+            isLoading={promotionLoading}
+            errMess={promotionErrMess}
           />
         </div>
         <div className="col-md m-1">
           <RenderCard
-            item={props.campsite}
-            isLoading={props.campsitesLoading}
-            errMess={props.campsitesErrMess}
+            item={campsite}
+            isLoading={campsitesLoading}
+            errMess={campsitesErrMess}
           />
         </div>
         <div className="col-md m-1">
-          <RenderCard item={props.partner} />
+          <RenderCard item={partner} />
         </div>
       </div>
     </div>
